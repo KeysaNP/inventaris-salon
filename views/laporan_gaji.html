@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Gaji - Sage Salon</title>
+    <!-- CSS terhubung keluar folder views -->
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <!-- =============== NAVIGATION SIDEBAR (TAMPIL UTUH) ================ -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+       <ul class="nav-links">
+            <!-- Karena sesama file di dalam folder views, langsung panggil nama .html nya lurus -->
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+
+    </div>
+
+    <!-- =============== KONTEN UTAMA SINGLE COLUMN =============== -->
+    <div class="main-container single-column">
+        <div class="header-title">Laporan Gaji Karyawan</div>
+        
+        <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <p>Sistem menjumlahkan akumulasi jatah komisi bersih mingguan secara otomatis.</p>
+            <button class="cat-btn active" onclick="window.location.href='../proses_laporan_gaji.php'" style="border-radius: 6px;">🔄 Ambil Rekap Gaji Real-Time</button>
+        </div>
+
+        <div class="section-box">
+            <div class="section-title">Rekap Upah Kumulatif Stylist: Rina</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Hari Kerja</th>
+                        <th>Layanan yang Selesai Dikerjakan</th>
+                        <th>Jatah Komisi Bersih (40% Net)</th>
+                        <th>Status Perhitungan</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-body-gaji">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #999; padding: 20px;">Silakan klik tombol "Ambil Rekap Gaji Real-Time" di atas untuk memproses angka.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('sukses_gaji')) {
+            const rekapBaris = decodeURIComponent(urlParams.get('rows'));
+            const totalGaji = parseInt(urlParams.get('total_gaji')).toLocaleString('id-ID');
+
+            // Suntikkan baris tabel dan buat baris total tagihan paling bawah
+            document.getElementById('tabel-body-gaji').innerHTML = rekapBaris + `
+                <tr style="background:#f4f7f4; font-weight:bold; font-size:16px; border-top:2px solid #4e7055;">
+                    <td colspan="2" style="text-align:right; color:#2d4a36;">Total Transfer Gaji Akhir Minggu:</td>
+                    <td style="color:#2d4a36;">Rp ${totalGaji}</td>
+                    <td>-</td>
+                </tr>`;
+        }
+    </script>
+</body>
+</html>

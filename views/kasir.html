@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kasir Salon - Sage Salon & Spa</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <style>
+        .modal-bayar { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 999; }
+        .modal-content-bayar { background: white; padding: 30px; border-radius: 12px; width: 360px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .qris-img { width: 180px; height: 180px; margin: 15px auto; display: block; border: 1px solid #ddd; padding: 5px; }
+        .code-box { background: #f4f7f4; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 16px; font-weight: bold; color: #2d4a36; letter-spacing: 1px; margin: 15px 0; border: 1px dashed #9bbfa5; }
+    </style>
+</head>
+<body>
+
+    <!-- =============== NAVIGATION SIDEBAR ================ -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li class="active"><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+    </div>
+
+    <!-- =============== KONTEN UTAMA KASIR =============== -->
+    <div class="main-container">
+        <div class="header-title">Kasir Salon</div>
+
+        <div class="category-filter">
+            <button class="cat-btn active">Semua</button>
+            <button class="cat-btn">Rambut</button>
+            <button class="cat-btn">Wajah</button>
+        </div>
+
+        <!-- KARTU LAYANAN SALON -->
+        <div class="services-area">
+            <div class="section-box">
+                <div class="section-title">Pilih Layanan</div>
+                <div class="services-grid">
+                    <div class="service-card" onclick="pilihJasa('Potong Rambut', 60000, 5000, 'Gunting Pro', 'pcs')">
+                        <ion-icon name="cut-outline"></ion-icon>
+                        <h4>Potong Rambut</h4><p>Gunting, Rp 60rb</p>
+                    </div>
+                    <div class="service-card" onclick="pilihJasa('Smoothing Rambut', 500000, 65000, 'Krim Rebonding Makarizo', 'gram')">
+                        <ion-icon name="sparkles-outline"></ion-icon>
+                        <h4>Smoothing Rambut</h4><p>Obat & Catok, Rp 500rb</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORM DETAIL TRANSAKSI & PILIHAN METODE PEMBAYARAN -->
+        <div class="form-area">
+            <form id="form-kasir-pos" method="POST" action="../proses_kasir.php">
+                <div class="section-box">
+                    <div class="section-title">Detail Transaksi</div>
+                    <div class="form-group"><label>Nama Jasa / Layanan</label><input type="text" name="nama_layanan" id="in_nama" value="Smoothing Rambut" readonly></div>
+                    <div class="form-group"><label>Harga Jual Jasa (Rp)</label><input type="number" name="harga_layanan" id="in_harga" value="500000" readonly></div>
+                    <div class="form-group">
+                        <label>Pilih Karyawan Stylist</label>
+                        <select name="karyawan_pilih"><option value="Rina">Rina</option><option value="Siti">Siti</option></select>
+                    </div>
+                    <input type="hidden" name="modal_input" id="in_modal" value="65000">
+                </div>
+
+                <!-- PEMILIHAN METODE PEMBAYARAN -->
+                <div class="section-box" style="margin-top:-10px;">
+                    <div class="section-title">💳 Metode Pembayaran Jasa</div>
+                    <div class="form-group">
+                        <label>Pilih Jenis Pembayaran</label>
+                        <select id="metode_bayar" name="metode_bayar" onchange="cekMetode()">
+                            <option value="tunai" selected>Cash / Tunai Langsung</option>
+                            <option value="qris">QRIS Standar QR Code (Auto-Generate)</option>
+                            <option value="bca">BCA Virtual Account Gateway</option>
+                            <option value="mandiri">Mandiri Bill Payment Gateway</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- RINCIAN PERHITUNGAN -->
+                <div class="section-box" style="margin-top:-10px;">
+                    <div class="section-title">Rincian Perhitungan</div>
+                    <div class="calc-row"><span>Harga Layanan</span><strong id="lbl_harga">Rp 500.000</strong></div>
+                    <div class="calc-row"><span>Modal Resep Bahan</span><strong id="lbl_modal" style="color:#b35c00;">Rp 65.000</strong></div>
+                    <div class="calc-row"><span>Pendapatan Bersih (Jasa)</span><strong id="lbl_bersih" style="color:blue;">Rp 435.000</strong></div>
+                    <div class="calc-row"><span>Komisi Karyawan (40%)</span><strong id="lbl_komisi" style="color:green;">Rp 174.000</strong></div>
+                    <div class="calc-row"><span>Keuntungan Salon</span><strong id="lbl_salon">Rp 261.000</strong></div>
+                    <button type="button" onclick="bukaGerbangBayar()" class="btn-pay">Proses Pembayaran Jasa</button>
+                </div>
+            </form>
+            
+            <div id="wadah-struk"></div>
+        </div>
+    </div>
+
+    <!-- =============== MODAL POP-UP SIMULASI GATEWAY ASLI =============== -->
+    <div class="modal-bayar" id="pop-gateway">
+        <div class="modal-content-bayar">
+            <h3 id="pop-title" style="color: #2d4a36;">Memproses Pembayaran</h3>
+            <p style="font-size: 13px; color: #666; margin-top: 5px;">Total Tagihan: <span id="pop-total" style="font-weight: bold; color: #2d4a36;">Rp 500.000</span></p>
+            
+            <!-- QRIS -->
+            <div id="pop-area-qris" style="display: none;">
+                <img src="https://qrserver.com" class="qris-img" alt="QRIS">
+                <p style="font-size: 12px; color: #888;">Silakan scan menggunakan e-wallet pelanggan.</p>
+            </div>
+
+            <!-- Bank VA -->
+            <div id="pop-area-va" style="display: none;">
+                <p style="font-size: 13px; margin-top: 15px;">Nomor Virtual Account:</p>
+                <div class="code-box" id="pop-va-number">8001234567890</div>
+                <p style="font-size: 12px; color: #888;">Gunakan ATM atau M-Banking untuk menyelesaikan transfer.</p>
+            </div>
+
+            <hr style="border:0; border-top: 1px dashed #ddd; margin: 20px 0;">
+            <button class="btn-pay" onclick="konfirmasiSukses()" style="margin-top: 0; background: #2d4a36;">Konfirmasi Bayar Lunas</button>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com"></script>
+    <script>
+        function pilihJasa(nama, harga, modal, produk, satuan) {
+            document.getElementById('in_nama').value = nama;
+            document.getElementById('in_harga').value = harga;
+            document.getElementById('in_modal').value = modal;
+            
+            let bersih = harga - modal; let komisi = 0.40 * bersih; let salon = bersih - komisi;
+            document.getElementById('lbl_harga').innerText = "Rp " + harga.toLocaleString('id-ID');
+            document.getElementById('lbl_modal').innerText = "Rp " + modal.toLocaleString('id-ID');
+            document.getElementById('lbl_bersih').innerText = "Rp " + bersih.toLocaleString('id-ID');
+            document.getElementById('lbl_komisi').innerText = "Rp " + komisi.toLocaleString('id-ID');
+            document.getElementById('lbl_salon').innerText = "Rp " + salon.toLocaleString('id-ID');
+        }
+
+        function bukaGerbangBayar() {
+            const metode = document.getElementById('metode_bayar').value;
+            const harga = parseInt(document.getElementById('in_harga').value);
+            
+            document.getElementById('pop-total').innerText = "Rp " + harga.toLocaleString('id-ID');
+            document.getElementById('pop-area-qris').style.display = 'none';
+            document.getElementById('pop-area-va').style.display = 'none';
+
+            if (metode === 'tunai') {
+                konfirmasiSukses(); 
+                return;
+            } else if (metode === 'qris') {
+                document.getElementById('pop-title').innerText = "QRIS Dynamic Hubungan Aktif";
+                document.getElementById('pop-area-qris').style.display = 'block';
+            } else if (metode === 'bca') {
+                document.getElementById('pop-title').innerText = "BCA Virtual Account Connected";
+            }
+        }

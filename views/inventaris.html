@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventaris Gudang - Sage Salon</title>
+    <!-- Menghubungkan ke file CSS eksternal di folder public -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <style>
+        /* Desain tombol aksi belanja ke beranda Shopee */
+        .btn-shopee {
+            background: #ee4d2d;
+            color: #fff !important;
+            text-decoration: none;
+            padding: 6px 12px;
+            font-size: 11px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-shopee:hover {
+            background: #d73f22;
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =============== NAVIGATION SIDEBAR ================ -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li class="active"><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+        <div class="profile-content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="https://imgur.com" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Sari</div>
+                        <div class="job">(Admin)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== KONTEN UTAMA DUAL COLUMNS =============== -->
+    <div class="main-container">
+        <div class="header-title">Inventaris</div>
+
+        <!-- KOLOM KIRI INPUT BARANG DATANG -->
+        <div class="services-area">
+            <div class="section-box">
+                <div class="section-title">📥 Input Barang Masuk</div>
+                
+                <form method="POST" action="../proses_inventaris.php">
+                    <div class="form-group">
+                        <label>Nama Barang Gudang</label>
+                        <input type="text" name="nama_barang" placeholder="Contoh: Krim Rebonding Makarizo" required>
+                    </div>
+                    <div class="grid-2col">
+                        <div class="form-group">
+                            <label>Harga Beli Total (Rp)</label>
+                            <input type="number" name="harga_beli" placeholder="400000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Isi / Berat Kulakan</label>
+                            <input type="number" step="any" name="jumlah" placeholder="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Satuan Pembelian</label>
+                        <select name="satuan">
+                            <option value="kg">Kilogram (Kg)</option>
+                            <option value="liter">Liter</option>
+                            <option value="gram">Gram</option>
+                            <option value="ml">Mililitir (Ml)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-pay">Hitung & Konversi via PHP</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- KOLOM KANAN MONITORING STOK & TAUTAN BERANDA UTAMA SHOPEE -->
+        <div class="form-area">
+            <div class="section-box">
+                <div class="section-title">📊 Kondisi Stok Terkini</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Barang</th>
+                            <th>Sisa Stok</th>
+                            <th>Aksi Belanja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Krim Rebonding Makarizo</td>
+                            <td><strong>850 gram</strong></td>
+                            <td>
+                                <!-- Tautan Shopee -->
+                                <a href="https://shopee.co.id" target="_blank" class="btn-shopee">❤️ Beli</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sampo L'Oréal</td>
+                            <td><strong style="color: red;">4 ml ⚠️</strong></td>
+                            <td>
+                                <a href="https://shopee.co.id" target="_blank" class="btn-shopee">❤️ Beli Cepat</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <script type="module" src="https://unpkg.com"></script>
+</body>
+</html>

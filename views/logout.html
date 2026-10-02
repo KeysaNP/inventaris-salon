@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Out - Sage Salon</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+       <ul class="nav-links">
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+
+
+        <div class="profile-content">
+            <div class="profile"><div class="profile_details"><img src="https://imgur.com"><div class="name_job"><div class="name">Sari</div><div class="job">(Admin)</div></div></div></div>
+        </div>
+    </div>
+
+    <div class="main-container single-column">
+        <div class="header-title">Keluar Sistem</div>
+        <div class="section-box" style="max-width: 450px; text-align: center; padding: 40px 20px;">
+            <ion-icon name="log-out-outline" style="font-size: 50px; color:#4e7055; margin-bottom:15px;"></ion-icon>
+            <h3 style="margin-bottom:20px;">Apakah Anda yakin ingin keluar?</h3>
+            <button class="cat-btn" onclick="window.location.href='dashboard.html'">Batal</button>
+            <button class="btn-pay" onclick="alert('Keluar sukses!'); window.location.href='dashboard.html'" style="width:auto; margin-top:0; padding:10px 20px; background:#c54b4b;">Keluar</button>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com"></script>
+</body>
+</html>

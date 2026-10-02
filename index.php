@@ -1,56 +1,53 @@
+<?php
+// 1. Ambil parameter halaman dari URL
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Inventaris Salon</title>
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
-
 <body>
 
-    <?php
-    // Ambil halaman dari URL
-    $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+    <div style="display: flex;">
+        <!-- Tampilkan Menu Samping -->
+        <?php include 'views/sidebar.php'; ?>
 
-    // Panggil sidebar
-    include 'views/sidebar.php';
-    ?>
-
-    <!-- ================= Main ================= -->
-    <div class="main">
-
-        <?php
-        // Tentukan file halaman
-        $page_file = "views/{$page}.php";
-
-        // Panggil halaman
-        if (file_exists($page_file)) {
-            include $page_file;
-        } else {
-            echo "<div style='padding: 20px;'>
-                    <h2>404 - Halaman Tidak Ditemukan</h2>
-                  </div>";
-        }
-        ?>
-
+        <!-- Wadah Konten Utama Halaman (Akan berubah otomatis saat menu diklik) -->
+        <div class="main-content" style="flex: 1; padding: 20px;">
+            <?php
+            switch ($page) {
+                case 'dashboard':
+                    include 'views/dashboard.php';
+                    break;
+                case 'inventaris':
+                    include 'views/inventaris.php';
+                    break;
+                case 'kasir':
+                    include 'views/kasir.php';
+                    break;
+                case 'laporan_gaji':
+                    include 'views/laporan_gaji.php';
+                    break;
+                case 'password':
+                    include 'views/password.php';
+                    break;
+                case 'logout':
+                    echo "<script>alert('Log out berhasil'); window.location.href='index.php';</script>";
+                    break;
+                default:
+                    echo "<h2>Halaman tidak ditemukan!</h2>";
+                    break;
+            }
+            ?>
+        </div>
     </div>
 
-    <!-- JS -->
-    <script src="public/js/main.js"></script>
-
-    <!-- Ionicons -->
-    <script type="module"
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
-    </script>
-
-    <script nomodule
-        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
-    </script>
-
+    <script type="module" src="https://unpkg.com"></script>
+    <script nomodule src="https://unpkg.com"></script>
 </body>
 </html>

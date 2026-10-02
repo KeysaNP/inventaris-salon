@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Sistem - Sage Salon</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <!-- =============== NAVIGATION SIDEBAR ================ -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li class="active"><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+        <div class="profile-content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="https://imgur.com" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Sari</div>
+                        <div class="job">(Admin)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== KONTEN UTAMA SINGLE COLUMN =============== -->
+    <div class="main-container single-column">
+        <div class="header-title">Pengaturan Sistem</div>
+        
+        <form id="form-pengaturan" style="display: flex; flex-direction: column; gap: 20px; max-width: 600px;">
+            
+            <!-- KONFIGURASI OPERASIONAL -->
+            <div class="section-box">
+                <div class="section-title">🏢 Konfigurasi Nama & Operasional Salon</div>
+                <div class="form-group">
+                    <label>Nama Bisnis / Salon</label>
+                    <input type="text" id="set_nama" value="Sage Salon & Spa" required>
+                </div>
+                <div class="form-group">
+                    <label>Alamat Lengkap Salon</label>
+                    <input type="text" id="set_alamat" value="Jl. Kecantikan No. 45, Bandung">
+                </div>
+                <div class="form-group">
+                    <label>Nomor Telepon / WhatsApp Bisnis</label>
+                    <input type="text" id="set_telp" value="081234567890">
+                </div>
+            </div>
+
+            <!-- SISTEM RESEP & BAGI HASIL -->
+            <div class="section-box">
+                <div class="section-title">💰 Logika Bagi Hasil & Penggajian</div>
+                <div class="form-group">
+                    <label>Persentase Komisi Bersih Stylist / Karyawan (%)</label>
+                    <input type="number" id="set_komisi" value="40" min="1" max="100" required>
+                    <small style="color: #666; font-size: 11px; margin-top: 2px;">*Jatah komisi otomatis terhitung sebesar 40% dari keuntungan bersih jasa.</small>
+                </div>
+                <div class="form-group">
+                    <label>Siklus Akumulasi Laporan Gaji</label>
+                    <select id="set_siklus">
+                        <option value="mingguan" selected>Rekap Mingguan (Senin - Minggu)</option>
+                        <option value="bulanan">Rekap Bulanan</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- MANAJEMEN GUDANG (ALARM KRITIS) -->
+            <div class="section-box">
+                <div class="section-title">📦 Peringatan Stok Gudang</div>
+                <div class="form-group">
+                    <label>Batas Kritis Minimum Stok (Alarm Kritis Gudang)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="set_limit" value="150" style="flex: 1;" required>
+                        <span style="font-size: 13px; font-weight: bold; color: #4e7055;">gram / ml</span>
+                    </div>
+                    <small style="color: #666; font-size: 11px; margin-top: 2px;">*Notifikasi restok otomatis aktif jika volume bahan baku berada di bawah batas ini.</small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-pay" style="width: 100%; font-size: 14px; letter-spacing: 0.5px;">Simpan Semua Konfigurasi Sistem</button>
+        </form>
+    </div>
+
+    <script type="module" src="https://unpkg.com"></script>
+
+    
+    <script>
+        document.getElementById('form-pengaturan').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const namaSalon = document.getElementById('set_nama').value;
+            alert(`✨ Pengaturan Sistem Berhasil Diperbarui!\n\n• Nama Salon: ${namaSalon}\n\nSeluruh data operasional salon telah diperbarui.`);
+        });
+    </script>
+</body>
+</html>

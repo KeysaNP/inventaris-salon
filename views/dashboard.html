@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sage Salon</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+
+    <!-- =============== NAVIGATION SIDEBAR ================ -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <ion-icon name="flower-outline" class="logo-icon"></ion-icon>
+            <span class="logo_name">Sage <br><small>Salon & Spa</small></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html"><ion-icon name="home-outline"></ion-icon><span class="link_name">Dashboard</span></a></li>
+            <li><a href="inventaris.html"><ion-icon name="cube-outline"></ion-icon><span class="link_name">Inventaris</span></a></li>
+            <li><a href="kasir.html"><ion-icon name="cart-outline"></ion-icon><span class="link_name">Kasir Salon</span></a></li>
+            <li><a href="laporan_gaji.html"><ion-icon name="receipt-outline"></ion-icon><span class="link_name">Laporan Gaji</span></a></li>
+            <li><a href="pengaturan.html"><ion-icon name="settings-outline"></ion-icon><span class="link_name">Pengaturan</span></a></li>
+            <li><a href="password.html"><ion-icon name="lock-closed-outline"></ion-icon><span class="link_name">Password</span></a></li>
+            <li><a href="logout.html"><ion-icon name="log-out-outline"></ion-icon><span class="link_name">Sign Out</span></a></li>
+        </ul>
+
+
+        <div class="profile-content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="https://imgur.com">
+                    <div class="name_job"><div class="name">Sari</div><div class="job">(Admin)</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== KONTEN UTAMA DUA KOLOM =============== -->
+    <div class="main-container single-column">
+        <div class="header-title">Dashboard Utama</div>
+        <p>Selamat datang kembali, Sari! Berikut ringkasan operasional salon hari ini.</p>
+        
+        <div class="card-grid">
+            <div class="stat-card">
+                <h3>Total Transaksi Hari Ini</h3>
+                <p>12 Nota</p>
+            </div>
+            <div class="stat-card">
+                <h3>Kondisi Gudang</h3>
+                <p style="color: #b35c00;">2 Barang Menipis</p>
+            </div>
+            <div class="stat-card">
+                <h3>Karyawan Aktif</h3>
+                <p>4 Orang</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com"></script>
+</body>
+</html>
